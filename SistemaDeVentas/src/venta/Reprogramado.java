@@ -1,5 +1,7 @@
 package venta;
 
+import org.joda.time.DateTime;
+
 public class Reprogramado extends EstadoEnvio {
 
 	public void enviar(Envio env) {
@@ -12,9 +14,10 @@ public class Reprogramado extends EstadoEnvio {
 
 	}
 
-	public void reporgramar(Envio env) {
+	public void reprogramar(Envio env, DateTime fecha) {
 		// TODO Auto-generated method stub
 
 	}
+
 
 }
