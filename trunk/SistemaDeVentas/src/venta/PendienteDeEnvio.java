@@ -1,5 +1,7 @@
 package venta;
 
+import org.joda.time.DateTime;
+
 public class PendienteDeEnvio extends EstadoEnvio {
 
 	public void enviar(Envio env) {
@@ -15,6 +17,11 @@ public class PendienteDeEnvio extends EstadoEnvio {
 	public void reporgramar(Envio env) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public void reprogramar(Envio env, DateTime facha) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
