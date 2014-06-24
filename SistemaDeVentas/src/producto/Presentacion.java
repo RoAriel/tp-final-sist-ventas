@@ -11,25 +11,25 @@ import unidadDeMedida.UnidadDeMedida;
 
 public class Presentacion extends Observable implements Observer {
 	private int codigoDeBarras;
-	private int precioDeVentaActual;
-	private int precioDeCompraActual;
-	private Map<DateTime, Integer> preciosDeVenta;
-	private Map<DateTime, Integer> preciosDeCompra;
+	private double precioDeVentaActual;
+	private double precioDeCompraActual;
+	private Map<DateTime, Double> preciosDeVenta;
+	private Map<DateTime, Double> preciosDeCompra;
 	private Stock stock;
 	private UnidadDeMedida unidadDeMedida;
 	private Ubicacion ubicacion;
 
 	public Presentacion(int codigoDeBarras, UnidadDeMedida unidadDeMedida,
 			int stockActual, int stockCritico, int stockMinimo,
-			int precioDeVenta, int precioDeCompra, Ubicacion u) {
+			double precioDeVenta, double precioDeCompra, Ubicacion u) {
 		this.codigoDeBarras = codigoDeBarras;
 		this.precioDeCompraActual = precioDeCompra;
 		this.precioDeVentaActual = precioDeVenta;
 
 		// Se inicializa el historial de precios.
-		this.preciosDeVenta = new HashMap<DateTime, Integer>();
+		this.preciosDeVenta = new HashMap<DateTime, Double>();
 		this.preciosDeVenta.put(new DateTime(), this.precioDeVentaActual);
-		this.preciosDeCompra = new HashMap<DateTime, Integer>();
+		this.preciosDeCompra = new HashMap<DateTime, Double>();
 		this.preciosDeCompra.put(new DateTime(), precioDeCompra);
 
 		this.stock = new Stock(stockActual, stockCritico, stockMinimo);
@@ -45,35 +45,35 @@ public class Presentacion extends Observable implements Observer {
 		this.codigoDeBarras = codigoDeBarras;
 	}
 
-	private int getPrecioDeVentaActual() {
+	private double getPrecioDeVentaActual() {
 		return precioDeVentaActual;
 	}
 
-	private void setPrecioDeVentaActual(int precioDeVentaActual) {
+	private void setPrecioDeVentaActual(double precioDeVentaActual) {
 		this.precioDeVentaActual = precioDeVentaActual;
 	}
 
-	private int getPrecioDeCompraActual() {
+	private double getPrecioDeCompraActual() {
 		return precioDeCompraActual;
 	}
 
-	private void setPrecioDeCompraActual(int precioDeCompraActual) {
+	private void setPrecioDeCompraActual(double precioDeCompraActual) {
 		this.precioDeCompraActual = precioDeCompraActual;
 	}
 
-	private Map<DateTime, Integer> getPreciosDeVenta() {
+	private Map<DateTime, Double> getPreciosDeVenta() {
 		return preciosDeVenta;
 	}
 
-	private void setPreciosDeVenta(Map<DateTime, Integer> preciosDeVenta) {
+	private void setPreciosDeVenta(Map<DateTime, Double> preciosDeVenta) {
 		this.preciosDeVenta = preciosDeVenta;
 	}
 
-	private Map<DateTime, Integer> getPreciosDeCompra() {
+	private Map<DateTime, Double> getPreciosDeCompra() {
 		return preciosDeCompra;
 	}
 
-	private void setPreciosDeCompra(Map<DateTime, Integer> preciosDeCompra) {
+	private void setPreciosDeCompra(Map<DateTime, Double> preciosDeCompra) {
 		this.preciosDeCompra = preciosDeCompra;
 	}
 
@@ -151,7 +151,7 @@ public class Presentacion extends Observable implements Observer {
 	 * 
 	 * @return
 	 */
-	public int precioDeVenta() {
+	public Double precioDeVenta() {
 		return this.getPrecioDeVentaActual();
 	}
 
@@ -160,7 +160,7 @@ public class Presentacion extends Observable implements Observer {
 	 * 
 	 * @return
 	 */
-	public int precioDeCompra() {
+	public Double precioDeCompra() {
 		return this.getPrecioDeCompraActual();
 	}
 
@@ -189,12 +189,20 @@ public class Presentacion extends Observable implements Observer {
 	 * 
 	 * @return Map<DateTime,Integer> <Fecha,Precio>
 	 */
-	public Map<DateTime, Integer> historialDePrecios() {
+	public Map<DateTime, Double> historialDePrecios() {
 		return this.getPreciosDeVenta();
 	}
 
 	/**
-	 * Proposito: Decrementa el stock del producto.
+	 * Proposito: Aumenta el stock de la presentacion.
+	 * @param cantidadAAumentar
+	 */
+	public void aumentarStock(int cantidadAAumentar){
+		this.getStock().agregarStock(cantidadAAumentar);
+	}
+	
+	/**
+	 * Proposito: Decrementa el stock de la presentacion.
 	 * 
 	 * @param cantidadADecrementar
 	 *            es la cantidad que se tiene que decrementar del producto
@@ -208,7 +216,7 @@ public class Presentacion extends Observable implements Observer {
 	 * 
 	 * @param nuevoPrecio
 	 */
-	public void nuevoPrecioVenta(int nuevoPrecio) {
+	public void nuevoPrecioVenta(Double nuevoPrecio) {
 		this.setPrecioDeVentaActual(nuevoPrecio);
 		this.getPreciosDeVenta().put(new DateTime(), nuevoPrecio);
 	}
@@ -218,7 +226,7 @@ public class Presentacion extends Observable implements Observer {
 	 * 
 	 * @param nuevoPrecio
 	 */
-	public void nuevoPrecioCompra(int nuevoPrecio) {
+	public void nuevoPrecioCompra(Double nuevoPrecio) {
 		this.setPrecioDeCompraActual(nuevoPrecio);
 		this.getPreciosDeCompra().put(new DateTime(), nuevoPrecio);
 	}
