@@ -70,9 +70,9 @@ public class VentaDirecta extends Venta {
 		
 	}
 
-	public float subTotal(){
+	public double subTotal(){
 		
-		float total = 0;
+		double total = 0;
 		for(Presentacion p : this.getProductos()){
 			
 			total += p.precioDeVenta();
