@@ -2,6 +2,8 @@ package venta;
 
 import org.joda.time.DateTime;
 
+import cliente.Cliente;
+
 
 
 public class VentaADomicilio extends Venta {

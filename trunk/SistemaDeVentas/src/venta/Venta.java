@@ -2,6 +2,7 @@ package venta;
 
 import java.util.List;
 
+import cliente.Cliente;
 import producto.Presentacion;
 
 public class Venta {
