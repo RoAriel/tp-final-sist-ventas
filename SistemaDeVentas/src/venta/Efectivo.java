@@ -1,5 +1,7 @@
 package venta;
 
+import cliente.Cliente;
+
 public class Efectivo extends FormaDePago {
 
 	@Override

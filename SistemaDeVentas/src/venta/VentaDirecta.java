@@ -1,7 +1,9 @@
 package venta;
 
 import java.util.HashMap;
+import java.util.List;
 
+import cliente.Cliente;
 import exceptionVenta.AccionInvalidaException;
 import exceptionVenta.VentaDirectaStockInvalidoException;
 import producto.Presentacion;
@@ -73,7 +75,9 @@ public class VentaDirecta extends Venta {
 	public double subTotal(){
 		
 		double total = 0;
-		for(Presentacion p : this.getProductos()){
+		List<Presentacion> pro = this.getProductos();
+		
+		for(Presentacion p : pro){
 			
 			total += p.precioDeVenta();
 			
@@ -84,7 +88,9 @@ public class VentaDirecta extends Venta {
 
 	public void cancelarVenta(){
 		
-		for(Presentacion p : this.getProductos()){
+		List<Presentacion> pro = this.getProductos();
+		
+		for(Presentacion p : pro){
 			
 			p.aumentarStock(1);
 		}
