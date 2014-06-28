@@ -2,12 +2,14 @@ package producto;
 
 import java.util.Observable;
 
-public class Stock extends Observable{
+import exceptions.StockInsuficienteException;
+
+public class Stock extends Observable {
 	int stockActual;
 	int stockCritico;
 	int stockMinimo;
 
-	protected Stock(int stock, int critico, int minimo) {
+	protected Stock(int stock, int minimo, int critico) {
 		this.stockActual = stock;
 		this.stockCritico = critico;
 		this.stockMinimo = minimo;
@@ -21,24 +23,8 @@ public class Stock extends Observable{
 		this.stockActual = stockActual;
 	}
 
-	private int getStockCritico() {
-		return stockCritico;
-	}
-
-	private void setStockCritico(int stockCritico) {
-		this.stockCritico = stockCritico;
-	}
-
-	private int getStockMinimo() {
-		return stockMinimo;
-	}
-
-	private void setStockMinimo(int stockMinimo) {
-		this.stockMinimo = stockMinimo;
-	}
-
 	/**
-	 * Proposito: Denota la cantidad actual de stock.
+	 * Denota la cantidad actual de stock.
 	 * 
 	 * @return
 	 */
@@ -47,7 +33,7 @@ public class Stock extends Observable{
 	}
 
 	/**
-	 * Proposito: Denota true si se encuentra en estock el valor cantidad, Caso
+	 * Denota true si se encuentra en estock el valor cantidad, Caso
 	 * contrario false
 	 * 
 	 * @param cantidad
@@ -76,8 +62,13 @@ public class Stock extends Observable{
 	 * @param cantidad
 	 *            cantidad a decrementar de stock
 	 */
-	public void decrementarStock(int cantidad) {
-		this.setStockActual(this.getStockActual() - cantidad);
+	public void decrementarStock(int cantidad)
+			throws StockInsuficienteException {
+		if (this.enStock(cantidad)){
+			this.setStockActual(this.getStockActual() - cantidad);
+		}else{
+			throw new StockInsuficienteException();
+		}
 	}
 
 	/**
@@ -86,7 +77,7 @@ public class Stock extends Observable{
 	 * @return
 	 */
 	public int critico() {
-		return this.getStockCritico();
+		return this.stockCritico;
 	}
 
 	/**
@@ -95,6 +86,6 @@ public class Stock extends Observable{
 	 * @return
 	 */
 	public int minimo() {
-		return this.getStockMinimo();
+		return this.stockMinimo;
 	}
 }
