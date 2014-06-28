@@ -14,12 +14,8 @@ public class AlertaStock extends Observable implements Observer {
 		this.pedidos = new ArrayList<Pedido>();
 	}
 
-	private List<Pedido> getPedidos() {
-		return pedidos;
-	}
-
-	private void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
+	public List<Pedido> pedidos() {
+		return this.pedidos;
 	}
 
 	/**
@@ -31,7 +27,7 @@ public class AlertaStock extends Observable implements Observer {
 	 */
 	public void agregarPedido(Pedido nuevoPedido) {
 		this.addObserver(nuevoPedido);
-		this.getPedidos().add(nuevoPedido);
+		this.pedidos().add(nuevoPedido);
 	}
 
 	/**
@@ -42,11 +38,7 @@ public class AlertaStock extends Observable implements Observer {
 	 */
 	public void quitarPedido(Pedido pedidoAQuitar) {
 		this.deleteObserver(pedidoAQuitar);
-		this.getPedidos().remove(pedidoAQuitar);
-	}
-
-	public List<Pedido> pedidos() {
-		return this.getPedidos();
+		this.pedidos().remove(pedidoAQuitar);
 	}
 
 	@Override

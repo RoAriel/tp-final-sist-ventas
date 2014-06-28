@@ -7,10 +7,11 @@ import java.util.Observer;
 
 import org.joda.time.DateTime;
 
+import exceptions.StockInsuficienteException;
 import unidadDeMedida.UnidadDeMedida;
 
 public class Presentacion extends Observable implements Observer {
-	private int codigoDeBarras;
+	private String codigoDeBarras;
 	private double precioDeVentaActual;
 	private double precioDeCompraActual;
 	private Map<DateTime, Double> preciosDeVenta;
@@ -19,30 +20,30 @@ public class Presentacion extends Observable implements Observer {
 	private UnidadDeMedida unidadDeMedida;
 	private Ubicacion ubicacion;
 
-	public Presentacion(int codigoDeBarras, UnidadDeMedida unidadDeMedida,
-			int stockActual, int stockCritico, int stockMinimo,
+	public Presentacion(String codigoDeBarras, UnidadDeMedida unidadDeMedida,
+			int stockActual, int stockMinimo, int stockCritico,
 			double precioDeVenta, double precioDeCompra, Ubicacion u) {
 		this.codigoDeBarras = codigoDeBarras;
 		this.precioDeCompraActual = precioDeCompra;
 		this.precioDeVentaActual = precioDeVenta;
 
+		inicializarHistorialPrecios();
+
+		this.stock = new Stock(stockActual, stockMinimo, stockCritico);
+		this.unidadDeMedida = unidadDeMedida;
+		this.setUbicacion(u);
+	}
+
+	private void inicializarHistorialPrecios() {
 		// Se inicializa el historial de precios.
 		this.preciosDeVenta = new HashMap<DateTime, Double>();
 		this.preciosDeVenta.put(new DateTime(), this.precioDeVentaActual);
 		this.preciosDeCompra = new HashMap<DateTime, Double>();
-		this.preciosDeCompra.put(new DateTime(), precioDeCompra);
-
-		this.stock = new Stock(stockActual, stockCritico, stockMinimo);
-		this.unidadDeMedida = unidadDeMedida;
-		this.ubicacion = u;
+		this.preciosDeCompra.put(new DateTime(), this.precioDeCompraActual);
 	}
 
-	private int getCodigoDeBarras() {
+	public String getCodigoDeBarras() {
 		return codigoDeBarras;
-	}
-
-	private void setCodigoDeBarras(int codigoDeBarras) {
-		this.codigoDeBarras = codigoDeBarras;
 	}
 
 	private double getPrecioDeVentaActual() {
@@ -65,39 +66,19 @@ public class Presentacion extends Observable implements Observer {
 		return preciosDeVenta;
 	}
 
-	private void setPreciosDeVenta(Map<DateTime, Double> preciosDeVenta) {
-		this.preciosDeVenta = preciosDeVenta;
-	}
-
 	private Map<DateTime, Double> getPreciosDeCompra() {
 		return preciosDeCompra;
 	}
 
-	private void setPreciosDeCompra(Map<DateTime, Double> preciosDeCompra) {
-		this.preciosDeCompra = preciosDeCompra;
-	}
-
-	private Stock getStock() {
+	Stock getStock() {
 		return stock;
-	}
-
-	private void setStock(Stock stock) {
-		this.stock = stock;
 	}
 
 	private UnidadDeMedida getUnidadDeMedida() {
 		return unidadDeMedida;
 	}
 
-	private void setUnidadDeMedida(UnidadDeMedida unidadDeMedida) {
-		this.unidadDeMedida = unidadDeMedida;
-	}
-
-	private Ubicacion getUbicacion() {
-		return ubicacion;
-	}
-
-	private void setUbicacion(Ubicacion ubicacion) {
+	public void setUbicacion(Ubicacion ubicacion) {
 		this.ubicacion = ubicacion;
 	}
 
@@ -106,7 +87,7 @@ public class Presentacion extends Observable implements Observer {
 	 * 
 	 * @return
 	 */
-	public int codigoDeBarras() {
+	public String codigoDeBarras() {
 		return this.getCodigoDeBarras();
 	}
 
@@ -170,7 +151,7 @@ public class Presentacion extends Observable implements Observer {
 	 * @return
 	 */
 	public Ubicacion ubicacion() {
-		return this.getUbicacion();
+		return this.ubicacion;
 	}
 
 	/**
@@ -192,22 +173,27 @@ public class Presentacion extends Observable implements Observer {
 	public Map<DateTime, Double> historialDePrecios() {
 		return this.getPreciosDeVenta();
 	}
+	
+	public Map<DateTime, Double> historialDePreciosCompra(){
+		return this.preciosDeCompra;
+	}
 
 	/**
 	 * Proposito: Aumenta el stock de la presentacion.
+	 * 
 	 * @param cantidadAAumentar
 	 */
-	public void aumentarStock(int cantidadAAumentar){
+	public void aumentarStock(int cantidadAAumentar) {
 		this.getStock().agregarStock(cantidadAAumentar);
 	}
-	
+
 	/**
 	 * Proposito: Decrementa el stock de la presentacion.
 	 * 
 	 * @param cantidadADecrementar
 	 *            es la cantidad que se tiene que decrementar del producto
 	 */
-	public void decrementarStock(int cantidadADecrementar) {
+	public void decrementarStock(int cantidadADecrementar) throws StockInsuficienteException {
 		this.getStock().decrementarStock(cantidadADecrementar);
 	}
 
@@ -218,7 +204,7 @@ public class Presentacion extends Observable implements Observer {
 	 */
 	public void nuevoPrecioVenta(Double nuevoPrecio) {
 		this.setPrecioDeVentaActual(nuevoPrecio);
-		this.getPreciosDeVenta().put(new DateTime(), nuevoPrecio);
+		this.getPreciosDeVenta().put(this.dateTimeToday(), nuevoPrecio);
 	}
 
 	/**
@@ -228,9 +214,15 @@ public class Presentacion extends Observable implements Observer {
 	 */
 	public void nuevoPrecioCompra(Double nuevoPrecio) {
 		this.setPrecioDeCompraActual(nuevoPrecio);
-		this.getPreciosDeCompra().put(new DateTime(), nuevoPrecio);
+		this.getPreciosDeCompra().put(this.dateTimeToday(), nuevoPrecio);
 	}
 
+	private  DateTime dateTimeToday(){
+		DateTime t = new DateTime();
+		DateTime ret = new DateTime(t.getYear(),t.getMonthOfYear(),t.getDayOfMonth(),0,0,0);
+		return ret;
+	}
+	
 	@Override
 	public void update(Observable o, Object arg) {
 		this.setChanged();
