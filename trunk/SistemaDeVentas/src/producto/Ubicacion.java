@@ -10,40 +10,16 @@ class Ubicacion {
 		this.gondola = gondola;
 		this.estante = estante;
 	}
-
-	private int getPasillo() {
-		return pasillo;
-	}
-
-	private void setPasillo(int pasillo) {
-		this.pasillo = pasillo;
-	}
-
-	private int getGondola() {
-		return gondola;
-	}
-
-	private void setGondola(int gondola) {
-		this.gondola = gondola;
-	}
-
-	private int getEstante() {
-		return estante;
-	}
-
-	private void setEstante(int estante) {
-		this.estante = estante;
-	}
 	
 	public int pasillo(){
-		return this.getPasillo();
+		return pasillo;
 	}
 	
 	public int gondola(){
-		return this.getGondola();
+		return gondola;
 	}
 	
 	public int estante(){
-		return this.getEstante();
+		return estante;
 	}
 }
