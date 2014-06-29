@@ -3,6 +3,8 @@ package cliente;
 import java.util.ArrayList;
 import java.util.List;
 
+import exceptionVenta.SaldoInsuficienteCtaCteException;
+
 public class CuentaCorriente {
 	private Double saldo;
 	private Cliente propietario;
@@ -19,13 +21,7 @@ public class CuentaCorriente {
 		return propietario;
 	}
 
-
-
-	private void setPropietario(Cliente propietario) {
-		this.propietario = propietario;
-	}
-
-	private Double getSaldo() {
+	public Double saldo() {
 		return saldo;
 	}
 
@@ -37,40 +33,55 @@ public class CuentaCorriente {
 		return movimientos;
 	}
 
-	private void setMovimientos(List<String> movimientos) {
-		this.movimientos = movimientos;
-	}
-
-
 	/**
-	 * Proposito: Se le agrega monto a la cuenta corriente.
+	 * Se le agrega monto a la cuenta corriente.
 	 * @param monto
 	 */
 	public void depositar(Double monto){
-		this.setSaldo(this.getSaldo()+monto);
+		this.setSaldo(this.saldo()+monto);
 		this.registrarDeposito(monto);
 	}
 	
-	/**
-	 * Porposito: Decrementa monto de la cuenta corriente.
-	 * @param monto
-	 */
-	public void abonar(Double monto){
-		this.setSaldo(getSaldo()-monto);
-		this.notificarMovimiento("Se debitaron "+this.getSaldo()+" pesos de su cuenta corriente.");
-		this.registrarPago(monto);
+	private boolean saldoSuficiente(Double unMonto){
+		return this.saldo()>=unMonto;
 	}
 	
+	/**
+	 * Decrementa monto de la cuenta corriente.
+	 * @param monto
+	 */
+	public void abonar(Double monto) throws SaldoInsuficienteCtaCteException{
+		if (this.saldoSuficiente(monto)){
+			this.setSaldo(saldo()-monto);
+			this.notificarMovimiento("Se debitaron "+this.saldo()+" pesos de su cuenta corriente.");
+			this.registrarPago(monto);
+		}else{
+			throw new SaldoInsuficienteCtaCteException();
+		}
+	}
+	
+	/**
+	 * Agrega al registro interno el deposito que se realizo.
+	 * @param cantidad cantidad que se deposito
+	 */
 	private void registrarDeposito(Double cantidad){
 		String nuevoMovimiento = "Se depositaron "+cantidad+" pesos en la cuenta corriente.";
 		this.getMovimientos().add(nuevoMovimiento);
 	}
 	
+	/**
+	 * Agrega al registro interno la cantidad que se extrajo.
+	 * @param cantidad cantidad que se extrajo
+	 */
 	private void registrarPago(Double cantidad){
 		String nuevoMovimiento = "Se extrajo "+cantidad+" pesos en la cuenta corriente.";
 		this.getMovimientos().add(nuevoMovimiento);
 	}
 	
+	/**
+	 * Notifica al propietario de la CuentaCorriente sobre el movimiento.
+	 * @param arg
+	 */
 	private void notificarMovimiento(String arg){
 		this.getPropietario().notificacion(arg);
 		//notificar al cliente sobre el movimiento
