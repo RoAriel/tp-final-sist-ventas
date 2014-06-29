@@ -20,44 +20,28 @@ public class Cliente implements Observer{
 		this.direccion = direccion;
 	}
 
-	private String getNombre() {
-		return nombre;
-	}
-
-	private void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	private String getApellido() {
-		return apellido;
-	}
-
-	private void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-
-	private Integer getDni() {
-		return dni;
-	}
-
-	private void setDni(Integer dni) {
-		this.dni = dni;
-	}
-
-	private CuentaCorriente getCtaCte() {
+	public CuentaCorriente getCtaCte() {
 		return ctaCte;
-	}
-
-	private void setCtaCte(CuentaCorriente ctaCte) {
-		this.ctaCte = ctaCte;
-	}
-
-	private Direccion getDireccion() {
-		return direccion;
 	}
 
 	private void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
+	}
+	
+	public String nombre(){
+		return nombre;
+	}
+	
+	public String apellido(){
+		return apellido;
+	}
+	
+	public Direccion direccion(){
+		return direccion;
+	}
+	
+	public Integer dni(){
+		return dni;
 	}
 	
 	/**
