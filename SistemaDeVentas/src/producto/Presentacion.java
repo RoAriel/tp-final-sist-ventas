@@ -46,7 +46,7 @@ public class Presentacion extends Observable implements Observer {
 		return codigoDeBarras;
 	}
 
-	private double getPrecioDeVentaActual() {
+	public double getPrecioDeVentaActual() {
 		return precioDeVentaActual;
 	}
 
