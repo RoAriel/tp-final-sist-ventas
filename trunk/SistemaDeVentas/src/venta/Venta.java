@@ -28,11 +28,11 @@ public class Venta {
 		return formaDePago;
 	}
 
-	private void setProductos(List<Presentacion> productos) {
+	protected void setProductos(List<Presentacion> productos) {
 		this.productos = productos;
 	}
 
-	private void setProductosSinStock(List<Presentacion> productosSinStock) {
+	protected void setProductosSinStock(List<Presentacion> productosSinStock) {
 		this.productosSinStock = productosSinStock;
 	}
 
@@ -40,7 +40,7 @@ public class Venta {
 		this.cliente = cliente;
 	}
 
-	private void setFormaDePago(FormaDePago formaDePago) {
+	protected void setFormaDePago(FormaDePago formaDePago) {
 		this.formaDePago = formaDePago;
 	}
 
