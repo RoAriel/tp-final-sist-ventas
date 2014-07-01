@@ -31,7 +31,8 @@ public class VentaDirectaTest {
 
 		assertNotNull(ventaD.getProductos());
 		assertNotNull(ventaD.getProductosSinStock());
-		assertEquals(ventaD.getFormaDePago() , PagoEnEfectivo.class);
+		
+		assertTrue(ventaD.getFormaDePago().equals(new PagoEnEfectivo()));
 
 	}
 
