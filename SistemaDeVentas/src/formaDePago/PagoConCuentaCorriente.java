@@ -10,4 +10,12 @@ public class PagoConCuentaCorriente extends FormaDePago {
 
 	}
 
+	@Override
+	public boolean equals(Object other) {
+		 if (other == this) return true;
+		   if (other == null) return false;
+		   if (getClass() == other.getClass()) return true;
+		return false;
+	}
+
 }
