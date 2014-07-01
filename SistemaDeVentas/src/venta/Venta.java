@@ -2,8 +2,9 @@ package venta;
 
 import java.util.List;
 
-import cliente.Cliente;
 import producto.Presentacion;
+import cliente.Cliente;
+import formaDePago.FormaDePago;
 
 public class Venta {
 
@@ -40,7 +41,7 @@ public class Venta {
 		this.cliente = cliente;
 	}
 
-	protected void setFormaDePago(FormaDePago formaDePago) {
+	public void setFormaDePago(FormaDePago formaDePago) {
 		this.formaDePago = formaDePago;
 	}
 

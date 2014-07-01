@@ -1,8 +1,7 @@
 package venta;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.mock;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +21,6 @@ public class VentaDirectaTest {
 	@Before
 	public void setUp() throws Exception {
 
-		Cliente cliente = mock(Cliente.class);
 		ventaD = new VentaDirecta();
 	    pre1 = mock(Presentacion.class);
 	    pre2 = mock(Presentacion.class);
@@ -33,7 +31,6 @@ public class VentaDirectaTest {
 
 		assertNotNull(ventaD.getProductos());
 		assertNotNull(ventaD.getProductosSinStock());
-		
 		assertEquals(ventaD.getFormaDePago() , PagoEnEfectivo.class);
 
 	}
@@ -45,6 +42,7 @@ public class VentaDirectaTest {
 	    ventaD.agregarProducto(pre1, 1);
 	     assertEquals(1, ventaD.getProductos().size());
 	}
+
 
 
 	    /**
@@ -77,11 +75,15 @@ public class VentaDirectaTest {
 	 }
 
 	 @Test
-	 public void testSubTotal(){
+	 public void testSubTotal() throws StockInsuficienteException{
+		 
+		 Double param1 = (double)4;
+		 Double param2 = (double)6;
+		when(pre1.getPrecioDeVentaActual()).thenReturn(param1);
+	    when(pre2.getPrecioDeVentaActual()).thenReturn(param2);
 
-	    When(pre1.getPrecioDeVentaActual()).theReturn((double)4);
-	    When(pre2.getPrecioDeVentaActual()).theReturn((double)6);
-
+	    ventaD.agregarProducto(pre1, 1);
+	    ventaD.agregarProducto(pre2, 1);
 	    assertEquals((double)10, ventaD.subTotal(),0);
 	 }
 

@@ -1,9 +1,11 @@
 package venta;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import producto.Presentacion;
 import exceptions.StockInsuficienteException;
+import formaDePago.PagoConCuentaCorriente;
 import formaDePago.PagoEnEfectivo;
 
 public class VentaDirecta extends Venta {
@@ -21,8 +23,7 @@ public class VentaDirecta extends Venta {
 		pre.decrementarStock(cant);
 		
 		for (int i = 0; i < cant; i++) {
-			this.getProductos().add(pre)
-			;
+			this.getProductos().add(pre);
 
 		}
 
@@ -36,4 +37,19 @@ public class VentaDirecta extends Venta {
 		}
 
 	}
+	
+	public double subTotal(){
+		
+		Double total = (double) 0;
+		
+		List<Presentacion>pres = this.getProductos();
+		
+		for (Presentacion presentacion : pres) {
+			
+			total+= presentacion.getPrecioDeVentaActual();
+		}
+		
+		return total;
+	}
+
 }
