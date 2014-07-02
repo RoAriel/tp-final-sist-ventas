@@ -18,7 +18,8 @@ public class VentaDirecta extends Venta {
 
 	public VentaDirecta(Cliente cliente){
 
-		/// Preguntar!!!!!!!!
+		/// Preguntar!!!!!!!! el new  para que pasen los test
+		
 		this.setCliente(new Cliente());
 		this.setProductos(new ArrayList<Presentacion>());
 		this.setProductosSinStock(new ArrayList<Presentacion>());

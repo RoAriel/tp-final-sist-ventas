@@ -1,8 +1,8 @@
-package venta;
+package envio;
 
 import org.joda.time.DateTime;
 
-public class Cancelado extends EstadoEnvio {
+public class PendienteDeEnvio extends EstadoEnvio {
 
 	public void enviar(Envio env) {
 		// TODO Auto-generated method stub
