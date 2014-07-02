@@ -45,19 +45,6 @@ public class VentaDirectaTest {
 	}
 
 
-
-	    /**
-	    *  @throws StockInsuficienteException 
-	     * @Test (expected = StockInsuficienteException.class)
-	    *  public void testVentaADomicilioSinStock() throws StockInsuficienteException{
-	    *
-	    *       when(pre.decrementarStock(3)).thenThrow(StockInsuficienteException.class);
-	    *
-	    *       ventaD.agregarProducto(pre1,3);
-	    *       assertEquals(1, ventaD.getProductosSinStock().size());
-	    *   }
-	    **/
-
 	 @Test
 	 public void sacarProductoUnico() throws StockInsuficienteException{
 
