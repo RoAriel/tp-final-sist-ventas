@@ -12,6 +12,10 @@ public class Cliente implements Observer{
 	private CuentaCorriente ctaCte;
 	private Direccion direccion;
 	
+	public Cliente(){
+		
+	}
+	
 	public Cliente(String nombre, String apellido,Integer dni,Direccion direccion){
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -71,5 +75,13 @@ public class Cliente implements Observer{
 		this.notificacion((String)arg1);		
 	}
 	
-	
+	/**
+	 * Se usa en los test par preguntar si lo esperado es del tipo Cliente
+	 */
+	public boolean equals(Object other) {
+		 if (other == this) return true;
+		   if (other == null) return false;
+		   if (getClass() == other.getClass()) return true;
+		return false;
+	}
 }

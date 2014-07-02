@@ -4,6 +4,7 @@ import java.util.List;
 
 import producto.Presentacion;
 import cliente.Cliente;
+import exceptions.StockInsuficienteException;
 import formaDePago.FormaDePago;
 
 public class Venta {
@@ -37,12 +38,45 @@ public class Venta {
 		this.productosSinStock = productosSinStock;
 	}
 
-	private void setCliente(Cliente cliente) {
+	protected void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
-	public void setFormaDePago(FormaDePago formaDePago) {
+	protected void setFormaDePago(FormaDePago formaDePago) {
 		this.formaDePago = formaDePago;
 	}
 
+	public void agregarProducto(Presentacion pre, int cant)	throws StockInsuficienteException {
+
+		pre.decrementarStock(cant);
+		
+		for (int i = 0; i < cant; i++) {
+			this.getProductos().add(pre);
+
+		}
+
+	}
+	
+	public void sacarProducto(Presentacion pre, int cant) {
+
+		for (int i = 0; i < cant; i++) {
+
+			this.getProductos().remove(pre);
+		}
+
+	}
+	
+	public double subTotal(){
+		
+		Double total = (double) 0;
+		
+		List<Presentacion>pres = this.getProductos();
+		
+		for (Presentacion presentacion : pres) {
+			
+			total+= presentacion.getPrecioDeVentaActual();
+		}
+		
+		return total;
+	}
 }
