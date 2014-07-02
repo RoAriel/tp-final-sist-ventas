@@ -1,14 +1,28 @@
 package venta;
 
+import java.util.ArrayList;
+
 import org.joda.time.DateTime;
 
 import producto.Presentacion;
+import producto.Producto;
 import cliente.Cliente;
+import envio.Envio;
+import envio.PendienteDeEnvio;
 import exceptions.StockInsuficienteException;
 
 public class VentaADomicilio extends Venta {
 
 	private Envio envio;
+	private DateTime fechaEntrega;
+
+	public DateTime getFechaEntrega() {
+		return fechaEntrega;
+	}
+
+	private void setFechaEntrega(DateTime fechaEntrega) {
+		this.fechaEntrega = fechaEntrega;
+	}
 
 	public Envio getEnvio() {
 		return envio;
@@ -19,6 +33,15 @@ public class VentaADomicilio extends Venta {
 	}
 
 	public VentaADomicilio(DateTime fechaEnvio, Cliente cliente) {
+
+		Envio env = new Envio(cliente, this, fechaEnvio);
+		env.setEstado(new PendienteDeEnvio());
+
+		this.setProductos(new ArrayList<Presentacion>());
+		this.setProductosSinStock(new ArrayList<Presentacion>());
+		this.setCliente(cliente);
+		this.setFechaEntrega(fechaEnvio);
+		this.setEnvio(env);
 
 	}
 
@@ -48,6 +71,15 @@ public class VentaADomicilio extends Venta {
 	public void postergarEntrega(DateTime fechaEnvio) {
 
 		this.getEnvio().reprogramar(fechaEnvio);
+	}
+
+	public void sacarProductosDelLosPedidosSinStock(Presentacion pre, int cant) {
+
+		for (int i = 0; i < cant; i++) {
+
+			this.getProductosSinStock().remove(pre);
+
+		}
 	}
 
 }

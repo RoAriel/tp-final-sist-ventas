@@ -1,96 +1,82 @@
-package venta;
+package envio;
 
 import org.joda.time.DateTime;
 
+import venta.Venta;
 import cliente.Cliente;
 
 public class Envio {
 
 	private Cliente cliente;
-	
+
 	private Venta venta;
-	
+
 	private EstadoEnvio estado;
-	
+
 	private DateTime fechaEnvio;
-	
-	
-	
+
 	public Cliente getCliente() {
 		return cliente;
 	}
-
-
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
-
-
 	public Venta getVenta() {
 		return venta;
 	}
-
-
 
 	public void setVenta(Venta venta) {
 		this.venta = venta;
 	}
 
-
-
 	public EstadoEnvio getEstado() {
 		return estado;
 	}
-
-
 
 	public void setEstado(EstadoEnvio estado) {
 		this.estado = estado;
 	}
 
-
-
 	public DateTime getFechaEnvio() {
 		return fechaEnvio;
 	}
-
-
 
 	public void setFechaEnvio(DateTime fechaEnvio) {
 		this.fechaEnvio = fechaEnvio;
 	}
 
+	public Envio(Cliente cliente, Venta venta, DateTime fecha) {
 
-
-	public Envio(Cliente cliente, Venta venta, DateTime fecha){
-		
 		this.setCliente(cliente);
 		this.setVenta(venta);
 		this.setFechaEnvio(fecha);
 		this.setEstado(new PendienteDeEnvio());
-		
+
 	}
-	
-	public void enviar(float cantidadAAbonar){
-		
+
+	public void enviar(float cantidadAAbonar) {
+
 	}
-	
-	public void cancelar(){
-		
+
+	public void cancelar() {
+
 		this.getEstado().cancelar(this);
 	}
-	
-	public void reprogramar(DateTime fecha){
+
+	public void reprogramar(DateTime fecha) {
 		this.getEstado().reprogramar(this, fecha);
 	}
-	
-	private void devolverProductosAlStock(){
-		
-		
+
+	public boolean equals(Object other) {
+		if (other == this)
+			return true;
+		if (other == null)
+			return false;
+		if (getClass() == other.getClass())
+			return true;
+		return false;
 	}
-	
-	
 
 }

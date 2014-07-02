@@ -84,4 +84,6 @@ public class Cliente implements Observer{
 		   if (getClass() == other.getClass()) return true;
 		return false;
 	}
+	
+
 }
