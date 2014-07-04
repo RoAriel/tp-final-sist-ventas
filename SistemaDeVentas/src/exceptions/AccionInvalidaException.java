@@ -1,4 +1,4 @@
-package exceptionVenta;
+package exceptions;
 
 public class AccionInvalidaException extends Exception {
 	

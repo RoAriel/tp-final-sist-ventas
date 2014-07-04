@@ -5,7 +5,6 @@ import org.joda.time.DateTime;
 public class Reprogramado extends EstadoEnvio {
 
 	public void enviar(Envio env) {
-		// TODO Auto-generated method stub
 
 	}
 

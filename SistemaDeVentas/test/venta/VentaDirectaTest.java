@@ -13,6 +13,7 @@ import producto.Presentacion;
 import cliente.Cliente;
 import cliente.Direccion;
 import exceptions.StockInsuficienteException;
+import formaDePago.FormaDePago;
 import formaDePago.PagoEnEfectivo;
 
 public class VentaDirectaTest {
@@ -23,16 +24,21 @@ public class VentaDirectaTest {
     public Presentacion pre2;
     public Cliente cliente;
     public Direccion dir;
+    public PagoEnEfectivo pagoEnEfectivo;
+    public FormaDePago fp;
   
 	@Before
 	public void setUp() throws Exception {
 
 		ventaD = new VentaDirecta();
-		ventaDCp = new VentaDirecta(cliente);
+		
 	    pre1 = mock(Presentacion.class);
 	    pre2 = mock(Presentacion.class);
 	    cliente =mock(Cliente.class);
 	    dir = mock(Direccion.class);
+	    fp = mock(FormaDePago.class);
+	    ventaDCp = new VentaDirecta(cliente, fp);
+	    pagoEnEfectivo = mock(PagoEnEfectivo.class);
 	}
 
 	@Test
@@ -41,7 +47,8 @@ public class VentaDirectaTest {
 		assertNotNull(ventaD.getProductos());
 		assertNotNull(ventaD.getProductosSinStock());
 		
-		assertTrue(ventaD.getFormaDePago().equals(new PagoEnEfectivo()));
+		assertEquals(ventaD.getFormaDePago(),new PagoEnEfectivo());
+
 
 	}
 	
@@ -50,9 +57,9 @@ public class VentaDirectaTest {
 
 		assertNotNull(ventaDCp.getProductos());
 		assertNotNull(ventaDCp.getProductosSinStock());
-		assertTrue(ventaDCp.getCliente().equals(new Cliente()));
+		assertTrue(ventaDCp.getCliente().equals(cliente));
 		
-		assertTrue(ventaDCp.getFormaDePago().equals(new PagoEnEfectivo()));
+		assertEquals(ventaDCp.getFormaDePago(),fp);
 
 	}
 
@@ -93,6 +100,14 @@ public class VentaDirectaTest {
 	    ventaD.agregarProducto(pre1, 1);
 	    ventaD.agregarProducto(pre2, 1);
 	    assertEquals((double)10, ventaD.subTotal(),0);
+	 }
+	 
+	 @Test
+	 public void testDevolverCompra() throws StockInsuficienteException{
+		 
+		 ventaD.agregarProducto(pre1, 1);
+		 ventaD.devolverCompra();
+		 assertEquals(ventaD.getProductos().size(), 0);
 	 }
 
 }
