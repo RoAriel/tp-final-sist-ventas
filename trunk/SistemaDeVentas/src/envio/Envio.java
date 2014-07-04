@@ -4,6 +4,8 @@ import org.joda.time.DateTime;
 
 import venta.Venta;
 import cliente.Cliente;
+import exceptions.CanceladoException;
+import exceptions.ReprogramadoException;
 
 public class Envio {
 
@@ -56,16 +58,17 @@ public class Envio {
 
 	}
 
-	public void enviar(float cantidadAAbonar) {
+	public void enProceso(float cantidadAAbonar) {
 
+		
 	}
-
-	public void cancelar() {
+	
+	public void cancelar() throws CanceladoException {
 
 		this.getEstado().cancelar(this);
 	}
 
-	public void reprogramar(DateTime fecha) {
+	public void reprogramar(DateTime fecha) throws ReprogramadoException {
 		this.getEstado().reprogramar(this, fecha);
 	}
 

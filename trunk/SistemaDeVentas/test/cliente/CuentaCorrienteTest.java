@@ -1,12 +1,12 @@
 package cliente;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import exceptionVenta.SaldoInsuficienteCtaCteException;
+import exceptions.SaldoInsuficienteCtaCteException;
 
 public class CuentaCorrienteTest {
 	CuentaCorriente ctacte;

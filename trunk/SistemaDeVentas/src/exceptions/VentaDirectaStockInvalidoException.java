@@ -1,4 +1,4 @@
-package exceptionVenta;
+package exceptions;
 
 public class VentaDirectaStockInvalidoException extends Exception {
 

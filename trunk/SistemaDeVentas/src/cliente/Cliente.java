@@ -8,15 +8,11 @@ import producto.Presentacion;
 public class Cliente implements Observer{
 	private String nombre;
 	private String apellido;
-	private Integer dni;
+	private String dni;
 	private CuentaCorriente ctaCte;
 	private Direccion direccion;
 	
-	public Cliente(){
-		
-	}
-	
-	public Cliente(String nombre, String apellido,Integer dni,Direccion direccion){
+	public Cliente(String nombre, String apellido,String dni,Direccion direccion){
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.dni = dni;
@@ -44,7 +40,7 @@ public class Cliente implements Observer{
 		return direccion;
 	}
 	
-	public Integer dni(){
+	public String dni(){
 		return dni;
 	}
 	

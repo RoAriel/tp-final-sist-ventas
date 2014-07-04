@@ -1,8 +1,12 @@
 package venta;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,6 +31,7 @@ public class VentaADomicilioTest {
 	    pre1 = mock(Presentacion.class);
 	    pre2 = mock(Presentacion.class);
 	    envio = mock(Envio.class);
+	    
 	}
 
 	@Test
@@ -35,21 +40,18 @@ public class VentaADomicilioTest {
 		assertNotNull(ventaAD.getProductos());
 		assertNotNull(ventaAD.getProductosSinStock());
 		
-		assertEquals(ventaAD.getEnvio(), envio);
-		
+		//assertEquals(ventaAD.getEnvio(),new Envio(mock(Cliente.class), ventaAD, mock(DateTime.class)));
 		assertTrue(ventaAD.getFormaDePago().equals(new PagoConCuentaCorriente()));
 
 	}
 	
 	
-     @Test (expected = StockInsuficienteException.class)
+     @Test 
      public void testVentaADomicilioSinStock() throws StockInsuficienteException{
-   
-  
-          when(pre1.decrementarStock(3)).thenThrow(new StockInsuficienteException());
-   
+           
+          doThrow(new StockInsuficienteException()).when(pre1).decrementarStock(3);
           ventaAD.agregarProducto(pre1,3);
-          assertEquals(1, ventaAD.getProductosSinStock().size());
+          assertEquals(3, ventaAD.getProductosSinStock().size());
       }
      
      
@@ -62,7 +64,4 @@ public class VentaADomicilioTest {
 		
 	}
 
-	public void testPostergarEnvio(){
-
-	}
 }

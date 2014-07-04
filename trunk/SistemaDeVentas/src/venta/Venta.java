@@ -79,4 +79,16 @@ public class Venta {
 		
 		return total;
 	}
+	
+	public void devolverCompra(){
+		
+		for(Presentacion p : this.getProductos()){
+			
+			p.aumentarStock(1);
+			
+		}
+		
+		this.getProductos().clear();
+		
+	}
 }

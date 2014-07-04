@@ -3,7 +3,7 @@ package cliente;
 import java.util.ArrayList;
 import java.util.List;
 
-import exceptionVenta.SaldoInsuficienteCtaCteException;
+import exceptions.SaldoInsuficienteCtaCteException;
 
 public class CuentaCorriente {
 	private Double saldo;

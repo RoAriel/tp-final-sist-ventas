@@ -9,6 +9,7 @@ import producto.Producto;
 import cliente.Cliente;
 import envio.Envio;
 import envio.PendienteDeEnvio;
+import exceptions.ReprogramadoException;
 import exceptions.StockInsuficienteException;
 
 public class VentaADomicilio extends Venta {
@@ -68,7 +69,7 @@ public class VentaADomicilio extends Venta {
 		}
 	}
 
-	public void postergarEntrega(DateTime fechaEnvio) {
+	public void postergarEntrega(DateTime fechaEnvio) throws ReprogramadoException {
 
 		this.getEnvio().reprogramar(fechaEnvio);
 	}
