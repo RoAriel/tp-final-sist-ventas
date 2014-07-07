@@ -2,26 +2,31 @@ package envio;
 
 import org.joda.time.DateTime;
 
+import exceptions.CanceladoException;
+import exceptions.EnProcesoException;
+import exceptions.ReprogramadoException;
+
 public class PendienteDeEnvio extends EstadoEnvio {
 
-	public void enviar(Envio env) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void cancelar(Envio env) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void reporgramar(Envio env) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void reprogramar(Envio env, DateTime facha) {
+	@Override
+	public void enviar(Envio env, double cantAAbonar) throws EnProcesoException {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void cancelar(Envio env) throws CanceladoException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void reprogramar(Envio env, DateTime fecha)
+			throws ReprogramadoException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 }
