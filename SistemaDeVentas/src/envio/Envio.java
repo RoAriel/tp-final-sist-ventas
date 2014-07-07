@@ -5,7 +5,9 @@ import org.joda.time.DateTime;
 import venta.Venta;
 import cliente.Cliente;
 import exceptions.CanceladoException;
+import exceptions.EnProcesoException;
 import exceptions.ReprogramadoException;
+import exceptions.SaldoInsuficienteCtaCteException;
 
 public class Envio {
 
@@ -58,9 +60,9 @@ public class Envio {
 
 	}
 
-	public void enProceso(float cantidadAAbonar) {
-
+	public void enviar(double cantAAbonar) throws EnProcesoException, SaldoInsuficienteCtaCteException{
 		
+		this.getEstado().enviar(this, cantAAbonar);
 	}
 	
 	public void cancelar() throws CanceladoException {

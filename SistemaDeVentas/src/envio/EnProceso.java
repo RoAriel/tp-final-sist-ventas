@@ -2,26 +2,34 @@ package envio;
 
 import org.joda.time.DateTime;
 
+import exceptions.CanceladoException;
+import exceptions.EnProcesoException;
+import exceptions.ReprogramadoException;
+import exceptions.SaldoInsuficienteCtaCteException;
+
 public class EnProceso extends EstadoEnvio {
 
-	public void enviar(Envio env) {
-		// TODO Auto-generated method stub
+	@Override
+	public void enviar(Envio env, double cantAAbonar) throws EnProcesoException, SaldoInsuficienteCtaCteException {
 
+		env.getVenta().getCliente().getCtaCte().abonar(cantAAbonar);
 	}
 
-	public void cancelar(Envio env) {
-		// TODO Auto-generated method stub
+	@Override
+	public void cancelar(Envio env) throws CanceladoException {
 
-	}
-
-	public void reporgramar(Envio env) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void reprogramar(Envio env, DateTime facha) {
-		// TODO Auto-generated method stub
+		env.getVenta().devolverCompra();
 		
 	}
+
+	@Override
+	public void reprogramar(Envio env, DateTime fecha)throws ReprogramadoException{
+		
+		env.getVenta().devolverCompra();
+		env.setFechaEnvio(fecha);
+		
+	}
+
+
 
 }
