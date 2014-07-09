@@ -80,6 +80,11 @@ public class Cliente implements Observer{
 		   if (getClass() == other.getClass()) return true;
 		return false;
 	}
+
+	public void pagar(double d) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

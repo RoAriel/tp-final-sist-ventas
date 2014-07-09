@@ -4,6 +4,7 @@ import cliente.Cliente;
 import exceptions.SaldoInsuficienteCtaCteException;
 
 public class PagoConCuentaCorriente extends FormaDePago {
+	
 
 	@Override
 	public void cobrar(Cliente cliente, double monto) throws SaldoInsuficienteCtaCteException{

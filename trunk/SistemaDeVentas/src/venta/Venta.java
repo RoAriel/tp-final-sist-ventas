@@ -4,6 +4,7 @@ import java.util.List;
 
 import producto.Presentacion;
 import cliente.Cliente;
+import exceptions.SaldoInsuficienteCtaCteException;
 import exceptions.StockInsuficienteException;
 import formaDePago.FormaDePago;
 
@@ -90,5 +91,12 @@ public class Venta {
 		
 		this.getProductos().clear();
 		
+	}
+	
+	public void cobrar() throws SaldoInsuficienteCtaCteException{
+		
+		
+		double monto = this.subTotal();
+		this.getFormaDePago().cobrar(this.getCliente(), monto);
 	}
 }
