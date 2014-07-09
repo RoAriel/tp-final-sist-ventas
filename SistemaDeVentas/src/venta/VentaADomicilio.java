@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import org.joda.time.DateTime;
 
 import producto.Presentacion;
-import producto.Producto;
 import cliente.Cliente;
 import envio.Envio;
 import envio.PendienteDeEnvio;
 import exceptions.ReprogramadoException;
 import exceptions.StockInsuficienteException;
+import formaDePago.FormaDePago;
 
 public class VentaADomicilio extends Venta {
 
@@ -33,7 +33,7 @@ public class VentaADomicilio extends Venta {
 		this.envio = envio;
 	}
 
-	public VentaADomicilio(DateTime fechaEnvio, Cliente cliente) {
+	public VentaADomicilio(DateTime fechaEnvio, Cliente cliente, FormaDePago fp) {
 
 		Envio env = new Envio(cliente, this, fechaEnvio);
 		env.setEstado(new PendienteDeEnvio());
@@ -43,6 +43,7 @@ public class VentaADomicilio extends Venta {
 		this.setCliente(cliente);
 		this.setFechaEntrega(fechaEnvio);
 		this.setEnvio(env);
+		this.setFormaDePago(fp);
 
 	}
 

@@ -43,7 +43,7 @@ public class CuentaCorrienteTest {
 		assertEquals((Double)0d, ctacte.saldo());
 	}
 	
-	@Test
+	@Test (expected = SaldoInsuficienteCtaCteException.class)
 	public void abonarConSaldoInsuficiente() throws SaldoInsuficienteCtaCteException{
 		ctacte.abonar(1d);
 	}
