@@ -9,9 +9,18 @@ import exceptions.SaldoInsuficienteCtaCteException;
 
 public abstract class EstadoEnvio {
 
-	public abstract void enviar(Envio env, double cantAAbonar)  throws EnProcesoException, SaldoInsuficienteCtaCteException;
+	public void enviar(Envio env, double cantAAbonar)  throws EnProcesoException, SaldoInsuficienteCtaCteException{
+		
+		env.setEstado(new EnProceso());
+		env.enviar(cantAAbonar); 
+	}
 	
-	public abstract void cancelar(Envio env) throws CanceladoException;
+	public void cancelar(Envio env) throws CanceladoException{
+		
+		env.getVenta().devolverCompra();
+		env.setEstado(new Cancelado());
+		
+	}
 	
 	public abstract void reprogramar(Envio env, DateTime fecha) throws ReprogramadoException;
 	

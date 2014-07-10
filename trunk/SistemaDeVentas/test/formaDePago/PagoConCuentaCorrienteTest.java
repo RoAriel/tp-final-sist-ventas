@@ -1,7 +1,6 @@
 package formaDePago;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import org.joda.time.DateTime;
@@ -18,6 +17,7 @@ public class PagoConCuentaCorrienteTest {
 
 
 	public PagoConCuentaCorriente pCtaCte;
+	public PagoConCuentaCorriente pCtaCte2;
 	public Cliente cliente;
 	public VentaADomicilio venta;
 	public DateTime fecha;
@@ -30,7 +30,7 @@ public class PagoConCuentaCorrienteTest {
 		cliente = mock(Cliente.class);
 		cTaCte= mock(CuentaCorriente.class); 
 		pCtaCte = new PagoConCuentaCorriente();
-		
+		pCtaCte2 = new PagoConCuentaCorriente();
 	}
 	
 	@Test (expected = SaldoInsuficienteCtaCteException.class)
@@ -57,5 +57,14 @@ public class PagoConCuentaCorrienteTest {
 	}
 	
 	
-
+	@Test
+	public void testEquals(){
+		
+		assertTrue(pCtaCte.equals(pCtaCte));
+		assertTrue(pCtaCte.equals(pCtaCte2));
+		assertFalse(pCtaCte.equals(null));
+		assertFalse(pCtaCte.equals(10d));
+		
+	}
+	
 }
