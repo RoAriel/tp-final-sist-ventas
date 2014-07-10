@@ -23,7 +23,7 @@ public class Envio {
 		return cliente;
 	}
 
-	public void setCliente(Cliente cliente) {
+	private void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
@@ -31,7 +31,7 @@ public class Envio {
 		return venta;
 	}
 
-	public void setVenta(Venta venta) {
+	private void setVenta(Venta venta) {
 		this.venta = venta;
 	}
 
@@ -51,6 +51,8 @@ public class Envio {
 		this.fechaEnvio = fechaEnvio;
 	}
 
+	public Envio() {}
+	
 	public Envio(Cliente cliente, Venta venta, DateTime fecha) {
 
 		this.setCliente(cliente);

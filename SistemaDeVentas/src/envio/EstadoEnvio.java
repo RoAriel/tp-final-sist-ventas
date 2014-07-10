@@ -22,6 +22,11 @@ public abstract class EstadoEnvio {
 		
 	}
 	
-	public abstract void reprogramar(Envio env, DateTime fecha) throws ReprogramadoException;
+	public void reprogramar(Envio env, DateTime fecha) throws ReprogramadoException{
+		
+		env.getVenta().devolverCompra();
+		env.setEstado(new Reprogramado());
+		env.reprogramar(fecha);
+	}
 	
 }

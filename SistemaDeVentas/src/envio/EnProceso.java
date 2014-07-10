@@ -1,9 +1,6 @@
 package envio;
 
-import org.joda.time.DateTime;
-
 import exceptions.EnProcesoException;
-import exceptions.ReprogramadoException;
 import exceptions.SaldoInsuficienteCtaCteException;
 
 public class EnProceso extends EstadoEnvio {
@@ -14,15 +11,5 @@ public class EnProceso extends EstadoEnvio {
 		env.getVenta().getCliente().getCtaCte().abonar(cantAAbonar);
 	}
 
-
-
-	@Override
-	public void reprogramar(Envio env, DateTime fecha)throws ReprogramadoException{
-		
-		env.getVenta().devolverCompra();
-		env.setEstado(new Reprogramado());
-		env.setFechaEnvio(fecha);
-		
-	}
 
 }
