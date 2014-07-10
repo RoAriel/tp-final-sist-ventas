@@ -15,19 +15,19 @@ import exceptions.EnProcesoException;
 
 public class EnProcesoTest {
 
-	private EnProceso enProceso;
-	private Envio envio;
-	
-	@Before
-	public void setUp() throws Exception {
-	
-		enProceso = new EnProceso();
-		envio = mock(Envio.class);
-		
-	}
-
-	@Test(expected = EnProcesoException.class)
-	public void  testEnviarExcepcion(){
-	}
+//	private EnProceso enProceso;
+//	private Envio envio;
+//	
+//	@Before
+//	public void setUp() throws Exception {
+//	
+//		enProceso = new EnProceso();
+//		envio = mock(Envio.class);
+//		
+//	}
+//
+//	@Test(expected = EnProcesoException.class)
+//	public void  testEnviarExcepcion(){
+//	}
 
 }
