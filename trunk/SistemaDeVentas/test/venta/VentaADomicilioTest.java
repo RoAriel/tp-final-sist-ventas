@@ -5,19 +5,15 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
-
-import java.sql.Date;
-
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
-
 import producto.Presentacion;
 import cliente.Cliente;
 import envio.Envio;
 import exceptions.StockInsuficienteException;
 import formaDePago.FormaDePago;
-import formaDePago.PagoConCuentaCorriente;
+
 
 public class VentaADomicilioTest {
 
