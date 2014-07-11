@@ -1,13 +1,16 @@
 package envio;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import venta.Venta;
 import cliente.Cliente;
 import cliente.CuentaCorriente;
+import exceptions.SaldoInsuficienteCtaCteException;
 
 public class EnProcesoTest {
 
@@ -15,6 +18,7 @@ public class EnProcesoTest {
 	private Envio envio;
 	private Cliente cliente;
 	private CuentaCorriente ctCt;
+	private Venta venta;
 	
 	
 	@Before
@@ -25,14 +29,24 @@ public class EnProcesoTest {
 		envio.setEstado(enProceso);
 		cliente =mock(Cliente.class);
 		ctCt = mock(CuentaCorriente.class);
+		venta = mock(Venta.class);
 		
 	}
 
 	@Test
-	public void  testEnviar(){
+	public void  testEnviar() throws SaldoInsuficienteCtaCteException{
 		
-		assertTrue(true);
+		when(envio.getVenta()).thenReturn(venta);
+		when(venta.getCliente()).thenReturn(cliente);
+		when(cliente.getCtaCte()).thenReturn(ctCt);
+		when(ctCt.saldo()).thenReturn(110d);
 		
+		enProceso.enviar(envio, 1000d);
+		
+		verify(envio).getVenta();
+		verify(venta).getCliente();
+		verify(cliente).getCtaCte();
+		verify(ctCt).abonar(1000d);
 		
 		
 	}
