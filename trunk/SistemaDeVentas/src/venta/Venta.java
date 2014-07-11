@@ -2,6 +2,8 @@ package venta;
 
 import java.util.List;
 
+import org.joda.time.DateTime;
+
 import producto.Presentacion;
 import cliente.Cliente;
 import exceptions.SaldoInsuficienteCtaCteException;
@@ -15,6 +17,18 @@ public class Venta {
 	private Cliente cliente;
 	private FormaDePago formaDePago;
 
+	private DateTime fechaDeSolicitudDeCompra;// es la fecha en la que el cliente 
+	  //solicita la compra
+
+
+	public DateTime getFechaDeSolicitudDeCompra() {
+		return fechaDeSolicitudDeCompra;
+	}
+
+	public void setFechaDeSolicitudDeCompra(DateTime dechaDeSolicitudDeCompra) {
+		this.fechaDeSolicitudDeCompra = dechaDeSolicitudDeCompra;
+	}
+	
 	public List<Presentacion> getProductos() {
 		return productos;
 	}
