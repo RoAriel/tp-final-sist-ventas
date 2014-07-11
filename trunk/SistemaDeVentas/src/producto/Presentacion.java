@@ -70,10 +70,15 @@ public class Presentacion extends Observable implements Observer {
 		return preciosDeCompra;
 	}
 
-	Stock getStock() {
+	private Stock getStock() {
 		return stock;
 	}
 
+	/**
+	 * Devuelve la unidad de medida de la presentacion.
+	 * 
+	 * @return UnidadDeMedida
+	 */
 	private UnidadDeMedida getUnidadDeMedida() {
 		return unidadDeMedida;
 	}
@@ -83,7 +88,7 @@ public class Presentacion extends Observable implements Observer {
 	}
 
 	/**
-	 * Proposito: Denota el codigo de barras.
+	 * Denota el codigo de barras.
 	 * 
 	 * @return
 	 */
@@ -92,7 +97,7 @@ public class Presentacion extends Observable implements Observer {
 	}
 
 	/**
-	 * Proposito: Denota la cantidad de stock actual.
+	 * Denota la cantidad de stock actual.
 	 * 
 	 * @return
 	 */
@@ -101,7 +106,7 @@ public class Presentacion extends Observable implements Observer {
 	}
 
 	/**
-	 * Proposito: Denota el stock critico de la presentacion.
+	 * Denota el stock critico de la presentacion.
 	 * 
 	 * @return
 	 */
@@ -110,7 +115,7 @@ public class Presentacion extends Observable implements Observer {
 	}
 
 	/**
-	 * Proposito: Denota el stock minimo de la presentacion.
+	 * Denota el stock minimo de la presentacion.
 	 * 
 	 * @return
 	 */
@@ -119,7 +124,7 @@ public class Presentacion extends Observable implements Observer {
 	}
 
 	/**
-	 * Proposito: Denota la unidad de medida.
+	 * Denota la unidad de medida.
 	 * 
 	 * @return
 	 */
@@ -128,7 +133,7 @@ public class Presentacion extends Observable implements Observer {
 	}
 
 	/**
-	 * Proposito: Denota el precio actual de venta.
+	 * Denota el precio actual de venta.
 	 * 
 	 * @return
 	 */
@@ -137,7 +142,7 @@ public class Presentacion extends Observable implements Observer {
 	}
 
 	/**
-	 * Proposito: Denota el precio actual de compra.
+	 * Denota el precio actual de compra.
 	 * 
 	 * @return
 	 */
@@ -146,7 +151,7 @@ public class Presentacion extends Observable implements Observer {
 	}
 
 	/**
-	 * Proposito: Denota la ubicacion de la presentacion.
+	 * Denota la ubicacion de la presentacion.
 	 * 
 	 * @return
 	 */
@@ -155,7 +160,7 @@ public class Presentacion extends Observable implements Observer {
 	}
 
 	/**
-	 * Proposito: Cambio la ubicacion de la presentacion.
+	 * Cambio la ubicacion de la presentacion.
 	 * 
 	 * @param nuevaUbicacion
 	 *            nueva ubicacion de la presentacion
@@ -165,21 +170,26 @@ public class Presentacion extends Observable implements Observer {
 	}
 
 	/**
-	 * Proposito: Denota el historial de precios por los cuales fue pasando el
-	 * producto
+	 * Denota el historial de precios por los cuales fue pasando el producto
 	 * 
 	 * @return Map<DateTime,Integer> <Fecha,Precio>
 	 */
 	public Map<DateTime, Double> historialDePrecios() {
 		return this.getPreciosDeVenta();
 	}
-	
-	public Map<DateTime, Double> historialDePreciosCompra(){
+
+	/**
+	 * Denota el historial de precios de compra por los cuales fue pasando el
+	 * producto.
+	 * 
+	 * @return Map<DateTime,Integer> <Fecha,Precio>
+	 */
+	public Map<DateTime, Double> historialDePreciosCompra() {
 		return this.preciosDeCompra;
 	}
 
 	/**
-	 * Proposito: Aumenta el stock de la presentacion.
+	 * Aumenta el stock de la presentacion.
 	 * 
 	 * @param cantidadAAumentar
 	 */
@@ -188,17 +198,18 @@ public class Presentacion extends Observable implements Observer {
 	}
 
 	/**
-	 * Proposito: Decrementa el stock de la presentacion.
+	 * Decrementa el stock de la presentacion.
 	 * 
 	 * @param cantidadADecrementar
 	 *            es la cantidad que se tiene que decrementar del producto
 	 */
-	public void decrementarStock(int cantidadADecrementar) throws StockInsuficienteException {
+	public void decrementarStock(int cantidadADecrementar)
+			throws StockInsuficienteException {
 		this.getStock().decrementarStock(cantidadADecrementar);
 	}
 
 	/**
-	 * Porposito: Cambia el precio de venta de la presentacion.
+	 * Cambia el precio de venta de la presentacion.
 	 * 
 	 * @param nuevoPrecio
 	 */
@@ -208,7 +219,7 @@ public class Presentacion extends Observable implements Observer {
 	}
 
 	/**
-	 * Proposito: Cambia el precio de compra de la presentacion
+	 * Cambia el precio de compra de la presentacion
 	 * 
 	 * @param nuevoPrecio
 	 */
@@ -217,12 +228,13 @@ public class Presentacion extends Observable implements Observer {
 		this.getPreciosDeCompra().put(this.dateTimeToday(), nuevoPrecio);
 	}
 
-	private  DateTime dateTimeToday(){
+	private DateTime dateTimeToday() {
 		DateTime t = new DateTime();
-		DateTime ret = new DateTime(t.getYear(),t.getMonthOfYear(),t.getDayOfMonth(),0,0,0);
+		DateTime ret = new DateTime(t.getYear(), t.getMonthOfYear(),
+				t.getDayOfMonth(), 0, 0, 0);
 		return ret;
 	}
-	
+
 	@Override
 	public void update(Observable o, Object arg) {
 		this.setChanged();

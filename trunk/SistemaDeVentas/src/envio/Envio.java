@@ -51,7 +51,6 @@ public class Envio {
 		this.fechaEnvio = fechaEnvio;
 	}
 
-	public Envio() {}
 	
 	public Envio(Cliente cliente, Venta venta, DateTime fecha) {
 

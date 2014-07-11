@@ -12,7 +12,7 @@ public class VentaDirecta extends Venta {
 
 	public VentaDirecta(){
 
-		this.setCliente(new Cliente("None","None","None",new Direccion("None", "None")));
+		this.setCliente(new Cliente("None","None","None",new Direccion("None", "None","None","None")));
 		this.setProductos(new ArrayList<Presentacion>());
 		this.setProductosSinStock(new ArrayList<Presentacion>());
 		this.setFormaDePago(new PagoEnEfectivo());
