@@ -35,14 +35,16 @@ public class EnProcesoTest {
 
 	@Test
 	public void  testEnviar() throws SaldoInsuficienteCtaCteException{
-		
+		// A cada uno de mis Mock's les asigno que devolver
 		when(envio.getVenta()).thenReturn(venta);
 		when(venta.getCliente()).thenReturn(cliente);
 		when(cliente.getCtaCte()).thenReturn(ctCt);
 		when(ctCt.saldo()).thenReturn(110d);
 		
+		// utilizo el metodo a testear 
 		enProceso.enviar(envio, 1000d);
 		
+		//verifico que cada mock devolvi lo correcto
 		verify(envio).getVenta();
 		verify(venta).getCliente();
 		verify(cliente).getCtaCte();

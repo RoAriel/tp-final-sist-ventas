@@ -1,12 +1,12 @@
 package venta;
 
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import cliente.Cliente;
+import cliente.CuentaCorriente;
 import exceptions.SaldoInsuficienteCtaCteException;
 import formaDePago.FormaDePago;
 
@@ -15,11 +15,13 @@ public class VentaTest {
 	private Cliente cliente;
 	private FormaDePago fp;
 	private Venta venta;
+	private CuentaCorriente ctct;
 	
 	@Before
 	public void setUp() throws Exception {
 		
-		venta = mock(Venta.class);
+		ctct = mock(CuentaCorriente.class);
+		venta = new Venta();
 		fp= mock(FormaDePago.class);
 		cliente = mock(Cliente.class);
 		 
@@ -29,10 +31,16 @@ public class VentaTest {
 	@Test (expected = SaldoInsuficienteCtaCteException.class)
 	public void testCobrarConException() throws SaldoInsuficienteCtaCteException{
 
-		when(venta.subTotal()).thenReturn(100d);
+		when(venta.getFormaDePago()).thenReturn(fp);
+		when(ctct.saldo()).thenReturn(0d);
+		when(venta.subTotal()).thenReturn(10000d);
 		doThrow(new SaldoInsuficienteCtaCteException()).when(fp).cobrar(cliente, venta.subTotal());
+		
 		venta.cobrar();
 		
+		
+	
+	
 	}
 
 }

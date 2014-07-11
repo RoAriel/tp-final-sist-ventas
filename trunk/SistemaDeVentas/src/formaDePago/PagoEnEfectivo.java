@@ -4,6 +4,10 @@ import cliente.Cliente;
 
 public class PagoEnEfectivo extends FormaDePago {
 
+/**
+ * Cobra a un Cliente x un monto
+ * 
+ */
 	@Override
 	public void cobrar(Cliente cliente, double monto) {
 	

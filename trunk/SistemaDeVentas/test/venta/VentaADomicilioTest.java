@@ -42,9 +42,11 @@ public class VentaADomicilioTest {
 	@Test
 	public void testConstructorSinParameros(){
 
+		//testeo del constructor viendo que no quedo en null ninguna variable
 		assertNotNull(ventaAD.getProductos());
 		assertNotNull(ventaAD.getProductosSinStock());
 		
+		// Veo que la forma de pago sea   efectivamente una forma de pago
 		assertTrue(ventaAD.getFormaDePago().equals(fp));
 
 	}
@@ -55,13 +57,15 @@ public class VentaADomicilioTest {
            
           doThrow(new StockInsuficienteException()).when(pre1).decrementarStock(3);
           ventaAD.agregarProducto(pre1,3);
+       
+          //consulto que se me agregaron productos si stck
           assertEquals(3, ventaAD.getProductosSinStock().size());
       }
      
      
 	@Test 
 	public void testSacarProductoDelPedidoSinStock(){
-		
+		// Saco y pongo productos  para luego verificar que se sacaron correctamente
 		ventaAD.agregarProductoSinStock(pre1, 1);
 		ventaAD.sacarProductosDelLosPedidosSinStock(pre1, 1);
 		assertEquals(ventaAD.getProductosSinStock().size(), 0);

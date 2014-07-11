@@ -94,11 +94,14 @@ public class VentaDirectaTest {
 		 
 		 Double param1 = (double)4;
 		 Double param2 = (double)6;
+		 
+	 
 		when(pre1.getPrecioDeVentaActual()).thenReturn(param1);
 	    when(pre2.getPrecioDeVentaActual()).thenReturn(param2);
 
 	    ventaD.agregarProducto(pre1, 1);
 	    ventaD.agregarProducto(pre2, 1);
+	    
 	    assertEquals((double)10, ventaD.subTotal(),0);
 	 }
 	 

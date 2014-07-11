@@ -61,6 +61,12 @@ public class Venta {
 		this.formaDePago = formaDePago;
 	}
 
+	/**
+	 * Se agregan Presentaciones a la venta 
+	 * @param pre
+	 * @param cant
+	 * @throws StockInsuficienteException
+	 */
 	public void agregarProducto(Presentacion pre, int cant)	throws StockInsuficienteException {
 
 		pre.decrementarStock(cant);
@@ -71,7 +77,12 @@ public class Venta {
 		}
 
 	}
-	
+	/**
+	 * Sequietan los productos especificados de la lista
+	 * 
+	 * @param pre
+	 * @param cant
+	 */
 	public void sacarProducto(Presentacion pre, int cant) {
 
 		for (int i = 0; i < cant; i++) {
@@ -80,6 +91,12 @@ public class Venta {
 		}
 
 	}
+	
+	/**
+	 * 
+	 * Pido el total de la  venta
+	 * @return
+	 */
 	
 	public double subTotal(){
 		
@@ -101,6 +118,9 @@ public class Venta {
 		return total;
 	}
 	
+	/**
+	 * Se devuelve la compra vaciando las listas
+	 */
 	public void devolverCompra(){
 		
 		for(Presentacion p : this.getProductos()){
@@ -112,6 +132,12 @@ public class Venta {
 		this.getProductos().clear();
 		
 	}
+	
+	/**
+	 * 
+	 * Se le cobra al cliente puede lanzar exception
+	 * @throws SaldoInsuficienteCtaCteException
+	 */
 	
 	public void cobrar() throws SaldoInsuficienteCtaCteException{
 			
