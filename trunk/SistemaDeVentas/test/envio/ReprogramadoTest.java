@@ -23,13 +23,13 @@ public class ReprogramadoTest {
 		env = mock(Envio.class);
 		repro = new Reprogramado();
 		vent = mock(Venta.class);
-		fecha = new DateTime();
+		fecha = new DateTime(2014, 7, 11, 12, 0);
 	}
 
 	@Test
 	public void testReprogramar() throws ReprogramadoException {
 	
-		DateTime f2 = new DateTime();
+		DateTime f2 = new DateTime(2014, 7, 11, 12, 30);
 			
 		when(env.getVenta()).thenReturn(vent);
 		when(env.getFechaEnvio()).thenReturn(fecha);
