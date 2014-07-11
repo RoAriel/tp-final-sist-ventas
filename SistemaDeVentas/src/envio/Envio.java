@@ -51,6 +51,12 @@ public class Envio {
 		this.fechaEnvio = fechaEnvio;
 	}
 
+	/**
+	 * Constructor de la clase Envio
+	 * @param cliente
+	 * @param venta
+	 * @param fecha
+	 */
 	
 	public Envio(Cliente cliente, Venta venta, DateTime fecha) {
 
@@ -60,17 +66,27 @@ public class Envio {
 		this.setEstado(new PendienteDeEnvio());
 
 	}
-
+	/**
+	 * Este metodo se utiliza para enviar el envio con un monto
+	 */
+	
 	public void enviar(double cantAAbonar) throws EnProcesoException, SaldoInsuficienteCtaCteException{
 		
 		this.getEstado().enviar(this, cantAAbonar);
 	}
-	
+	/**
+	 * Cancela el envio, puede lanzar una exception
+	 * @throws CanceladoException
+	 */
 	public void cancelar() throws CanceladoException {
 
 		this.getEstado().cancelar(this);
 	}
-
+	/**
+	 * Reprograma el Envio puede 
+	 * @param fecha
+	 * @throws ReprogramadoException
+	 */
 	public void reprogramar(DateTime fecha) throws ReprogramadoException {
 		this.getEstado().reprogramar(this, fecha);
 	}

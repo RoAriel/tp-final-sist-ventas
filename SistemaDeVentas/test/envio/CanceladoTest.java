@@ -26,6 +26,7 @@ public class CanceladoTest {
 		
 	}
 	
+	//Testeo que lanzo la exception
 	@Test(expected = CanceladoException.class)
 	public void testCancelar() throws CanceladoException {
 		
@@ -33,6 +34,7 @@ public class CanceladoTest {
 
 	}
 	
+	//Testeo que lanzo la exception
 	@Test(expected = EnProcesoException.class)
 	public void testEnviar() throws EnProcesoException {
 		
@@ -40,6 +42,7 @@ public class CanceladoTest {
 
 	}
 	
+	//Testeo que lanzo la exception
 	@Test(expected = ReprogramadoException.class)
 	public void testReprogramar() throws ReprogramadoException {
 		

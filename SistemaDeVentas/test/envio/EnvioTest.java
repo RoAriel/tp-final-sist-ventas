@@ -39,6 +39,7 @@ public class EnvioTest {
 		monto = 10d;
 	}
 
+	//Simplemente verifico la llegada del mensaje
 	@Test
 	public void testEnviarSeEjecuta() throws EnProcesoException,
 			SaldoInsuficienteCtaCteException {
@@ -47,16 +48,18 @@ public class EnvioTest {
 
 	}
 	
+	//Simplemente verifico la llegada del mensaje
 	@Test
 	public void testCancelarSinException() throws CanceladoException{
 		env.cancelar();
 		verify(estEnv).cancelar(env);
 		
 	}
-	
+
+	//Testeo que se lanzo la exception
 	@Test (expected = CanceladoException.class)
 	public void testCanclarConException() throws CanceladoException{
-		
+	
 		Cancelado envCancel = mock(Cancelado.class);
 		env.setEstado(envCancel);
 		doThrow(new CanceladoException()).when(envCancel).cancelar(env);
@@ -76,6 +79,7 @@ public class EnvioTest {
 		
 		Reprogramado envRepro = mock(Reprogramado.class);
 		env.setEstado(envRepro);
+		// utilizo el doThrow para poder testear un metodo void
 		doThrow(new ReprogramadoException()).when(envRepro).reprogramar(env, fecha);
 		env.reprogramar(fecha);
 	}
