@@ -33,7 +33,7 @@ public class presentacionTest {
 	public void correctoInstanciamientoDeClase() {
 		assertEquals("123456789", presentacion.codigoDeBarras());
 		assertNotNull(presentacion.unidadDeMedida());
-		assertNotNull(presentacion.getStock());
+		//assertNotNull(presentacion.getStock());
 		assertNotNull(presentacion.ubicacion());
 		assertEquals((Double) 10d, presentacion.precioDeVenta());
 		assertEquals((Double) 9d, presentacion.precioDeCompra());

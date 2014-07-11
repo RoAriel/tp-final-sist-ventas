@@ -16,7 +16,7 @@ public abstract class Oferta {
 	}
 
 	/**
-	 * Proposito: Denota el porcentaje de descuento sobre la oferta.
+	 * Denota el porcentaje de descuento sobre la oferta.
 	 * @return
 	 */
 	public int descuento(){

@@ -13,26 +13,34 @@ public class Direccion {
 		this.departamento = departamento;
 	}
 	
-	public Direccion(String calle,String numero){
-		//this.Direccion(calle,numero," "," ");
-		this.calle = calle;
-		this.numero =numero;
-		this.piso = " ";
-		this.departamento = " ";
-	}
-	
+	/**
+	 * Retorna la calle.
+	 * @return String
+	 */
 	public String calle(){
 		return calle;
 	}
 	
+	/**
+	 * Retorna el numero de 
+	 * @return String
+	 */
 	public String numero(){
 		return numero;
 	}
 	
+	/**
+	 * Retorna el piso.
+	 * @return String
+	 */
 	public String piso(){
 		return piso;
 	}
 	
+	/**
+	 * Retorna el departamento.
+	 * @return String
+	 */
 	public String departamento(){
 		return departamento;
 	}
