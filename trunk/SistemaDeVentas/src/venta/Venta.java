@@ -72,8 +72,14 @@ public class Venta {
 		Double total = (double) 0;
 		
 		List<Presentacion>pres = this.getProductos();
+		List<Presentacion>presSinStock = this.getProductosSinStock();
 		
 		for (Presentacion presentacion : pres) {
+			
+			total+= presentacion.getPrecioDeVentaActual();
+		}
+		
+		for (Presentacion presentacion : presSinStock) {
 			
 			total+= presentacion.getPrecioDeVentaActual();
 		}
@@ -94,8 +100,7 @@ public class Venta {
 	}
 	
 	public void cobrar() throws SaldoInsuficienteCtaCteException{
-		
-		
+			
 		double monto = this.subTotal();
 		this.getFormaDePago().cobrar(this.getCliente(), monto);
 	}
