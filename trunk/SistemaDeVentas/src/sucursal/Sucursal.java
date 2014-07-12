@@ -1,7 +1,6 @@
 package sucursal;
 
 import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Map;
 
@@ -9,66 +8,94 @@ import org.joda.time.DateTime;
 
 import producto.AlertaStock;
 import producto.Presentacion;
+import producto.Producto;
 import venta.Venta;
 import cliente.Cliente;
 
 public class Sucursal {
-	
+
 	Map<Cliente, List<Venta>> registroVenta;
-	List<Presentacion> productos;
+	List<Producto> productos;
 	AlertaStock alerta;
-	
-	public Sucursal (List<Presentacion> lp, Map<Cliente, List<Venta>> reg){
+
+	public Sucursal(List<Producto> lp, Map<Cliente, List<Venta>> reg) {
 		registroVenta = reg;
 		productos = lp;
-		
+		alerta = new AlertaStock();
+
 	}
-	
-	public void registrarVenta(Cliente c , Venta nuevaVenta){
-		getRegistroVenta().get(c).add(nuevaVenta);
+
+	public void registrarVenta(Cliente c, Venta nuevaVenta) {
+
+		if (!this.getRegistroVenta().containsKey(c)) {
+			this.registrarCliente(c);
+		}
+		this.getRegistroVenta().get(c).add(nuevaVenta);
 	}
-	
-	public void registrarCliente (Cliente c){
+
+	public void registrarCliente(Cliente c) {
 		getRegistroVenta().put(c, new ArrayList<Venta>());
 	}
-	
-	public List<Venta> ventasDesdeHastaMonto(float desde,float hasta, Cliente c){
-		List<Venta> ret = new ArrayList<Venta>(this.getRegistroVenta().get(c));
-		for(Venta v : ret){
-			if (!(desde <= v.subTotal() && v.subTotal() <= hasta)){
-				ret.remove(v);
+
+	public void agregarPresentacion(Producto producto, Presentacion presentacion) {
+		producto.agregarPresentacion(presentacion);
+	}
+
+	public List<Venta> ventasDesdeHastaMonto(Double desde, Double hasta,
+			Cliente c) {
+		List<Venta> ventas = this.getRegistroVenta().get(c);
+		List<Venta> ret = new ArrayList<Venta>();
+		for (Venta v : ventas) {
+			if ((desde <= v.subTotal()) && (v.subTotal() <= hasta)) {
+				// if (!(desde < v.subTotal() && v.subTotal() < hasta)){
+				ret.add(v);
 			}
 		}
 		return ret;
 	}
-	
-	public List<Venta> ventaDesdeHastaFecha(DateTime desde, DateTime hasta, Cliente c){
-		List<Venta> ret = new ArrayList<Venta>(this.getRegistroVenta().get(c));
-		for(Venta v : ret){
-			//comparar por fecha de solicitud de compra{
-				//descartar las ventas que no cumplen la condicion
-		    //}
-		}
-		return ret;
-	}
-	
-	public List<Presentacion> productosPorDebajoDeStockMinimo(){
-		List<Presentacion> ret = this.getProductos() ;
-		for(Presentacion p: ret){
-			if (p.stock()>=p.stockMinimo()){
-				ret.remove(p);
+
+	public List<Venta> ventaDesdeHastaFecha(DateTime desde, DateTime hasta,
+			Cliente c) {
+		List<Venta> ventas = this.getRegistroVenta().get(c);
+		List<Venta> ret = new ArrayList<Venta>();
+		for (Venta v : ventas) {
+			if (v.getFechaDeSolicitudDeCompra().isBefore(hasta)
+					&& v.getFechaDeSolicitudDeCompra().isAfter(desde)) {
+				ret.add(v);
 			}
 		}
 		return ret;
 	}
-	
-	public List<Presentacion> productosPorDebajoDeStockCritico(){
-		List<Presentacion> ret = this.getProductos() ;
-		for(Presentacion p: ret){
-			if (p.stock()>=p.stockCritico()){
-				ret.remove(p);
+
+	public List<Presentacion> productosPorDebajoDeStockMinimo() {
+		List<Presentacion> ret = new ArrayList<Presentacion>();
+		List<Producto> productos = this.getProductos();
+
+		for (Producto current : productos) {
+			List<Presentacion> listaPresentaciones = current.presentaciones();
+			for (Presentacion presentacion : listaPresentaciones) {
+				if (presentacion.stock() <= presentacion.stockMinimo()) {
+					ret.add(presentacion);
+				}
 			}
 		}
+
+		return ret;
+}
+
+	public List<Presentacion> productosPorDebajoDeStockCritico() {
+		List<Presentacion> ret = new ArrayList<Presentacion>();
+		List<Producto> productos = this.getProductos();
+
+		for (Producto current : productos) {
+			List<Presentacion> listaPresentaciones = current.presentaciones();
+			for (Presentacion presentacion : listaPresentaciones) {
+				if (presentacion.stock() >= presentacion.stockCritico()) {
+					ret.add(presentacion);
+				}
+			}
+		}
+
 		return ret;
 	}
 
@@ -80,11 +107,11 @@ public class Sucursal {
 		this.registroVenta = registroVenta;
 	}
 
-	public List<Presentacion> getProductos() {
+	public List<Producto> getProductos() {
 		return productos;
 	}
 
-	public void setProductos(List<Presentacion> productos) {
+	public void setProductos(List<Producto> productos) {
 		this.productos = productos;
 	}
 
@@ -97,4 +124,3 @@ public class Sucursal {
 	}
 
 }
-

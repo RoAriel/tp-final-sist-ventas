@@ -8,7 +8,6 @@ import java.util.Observer;
 import org.joda.time.DateTime;
 
 import exceptions.StockInsuficienteException;
-import unidadDeMedida.UnidadDeMedida;
 
 public class Presentacion extends Observable implements Observer {
 	private String codigoDeBarras;

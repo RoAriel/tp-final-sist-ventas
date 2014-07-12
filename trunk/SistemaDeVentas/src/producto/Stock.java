@@ -8,7 +8,7 @@ public class Stock extends Observable {
 	int stockActual;
 	int stockCritico;
 	int stockMinimo;
-
+	
 	protected Stock(int stock, int minimo, int critico) {
 		this.stockActual = stock;
 		this.stockCritico = critico;

@@ -6,17 +6,13 @@ public class ProductoEnOferta extends Oferta {
 
 	private Presentacion enOFerta;
 
-	public ProductoEnOferta(Presentacion enOferta, int porcentajeDescuento) {
+	public ProductoEnOferta(Presentacion enOferta, Double porcentajeDescuento) {
 		super(porcentajeDescuento);
 		this.enOFerta = enOferta;
 	}
 
 	protected Presentacion getEnOFerta() {
 		return enOFerta;
-	}
-
-	protected void setEnOFerta(Presentacion enOFerta) {
-		this.enOFerta = enOFerta;
 	}
 
 	@Override
@@ -26,7 +22,8 @@ public class ProductoEnOferta extends Oferta {
 
 	@Override
 	public Double precioOferta() {
-		return this.precioNormal()-(this.precioNormal()*this.getPorcentajeDescuento());
+		double cantidadDeDescuento = (this.precioNormal()*(this.descuento()/100));
+		return this.precioNormal()- cantidadDeDescuento;
 	}
 
 }
