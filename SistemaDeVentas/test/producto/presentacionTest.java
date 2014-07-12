@@ -1,6 +1,9 @@
 package producto;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
 import org.joda.time.DateTime;
 import org.junit.After;
@@ -8,16 +11,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import exceptions.StockInsuficienteException;
-import static org.mockito.Mockito.*;
-import unidadDeMedida.Unidad;
 
 public class presentacionTest {
 	Presentacion presentacion;
 	DateTime fechaDeHoy;
 
+
 	@Before
 	public void setUp() throws Exception {
-		this.presentacion = new Presentacion("123456789", mock(Unidad.class),
+		this.presentacion = new Presentacion("123456789", mock(UnidadDeMedida.class),
 				200, 50, 25, 10d, 9d, mock(Ubicacion.class));
 
 		DateTime t = new DateTime();

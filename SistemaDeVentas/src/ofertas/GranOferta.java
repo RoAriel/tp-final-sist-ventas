@@ -5,17 +5,13 @@ import java.util.List;
 public class GranOferta extends Oferta {
 	protected List<Oferta> ofertas;
 
-	public GranOferta(List<Oferta> ofertas, int porcentajeDescuento) {
+	public GranOferta(List<Oferta> ofertas, Double porcentajeDescuento) {
 		super(porcentajeDescuento);
 		this.ofertas = ofertas;
 	}
 
 	protected List<Oferta> getOfertas() {
 		return ofertas;
-	}
-
-	protected void setOfertas(List<Oferta> ofertas) {
-		this.ofertas = ofertas;
 	}
 
 	@Override
@@ -30,9 +26,11 @@ public class GranOferta extends Oferta {
 	@Override
 	public Double precioOferta() {
 		Double ret = 0.00d;
-		for (Oferta current : this.getOfertas()) {
+		List<Oferta> ofertas = this.getOfertas();
+		for (Oferta current : ofertas) {
 			ret += current.precioOferta();
 		}
-		return ret-(ret*this.descuento());
+
+		return ret-(ret*(this.descuento()/100d));
 	}
 }
