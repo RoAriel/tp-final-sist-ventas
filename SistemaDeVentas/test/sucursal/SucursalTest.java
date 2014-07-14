@@ -69,6 +69,14 @@ public class SucursalTest {
 		sucursal.registrarVenta(cliente1, venta2);
 		assertEquals(2, sucursal.getRegistroVenta().get(cliente1).size());
 	}
+	
+	@Test
+	public void obtenerVentaDe(){
+		sucursal.registrarVenta(cliente1, venta1);
+		sucursal.registrarVenta(cliente1, venta2);
+		assertTrue(sucursal.obtenerVentasDe(cliente1).contains(venta1));
+		assertTrue(sucursal.obtenerVentasDe(cliente1).contains(venta2));
+	}
 
 	@Test
 	public void ventasDesdeHasta() {

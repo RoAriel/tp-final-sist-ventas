@@ -20,6 +20,11 @@ public class VentaADomicilio extends Venta {
 	public DateTime getFechaEntrega() {
 		return fechaEntrega;
 	}
+	
+	@Override
+	public Boolean esVentaADomicilio(){
+		return true;
+	}
 
 	private void setFechaEntrega(DateTime fechaEntrega) {
 		this.fechaEntrega = fechaEntrega;

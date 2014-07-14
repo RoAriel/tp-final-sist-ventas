@@ -5,6 +5,7 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import producto.Presentacion;
+import venta.VentaADomicilio;
 import cliente.Cliente;
 import exceptions.SaldoInsuficienteCtaCteException;
 import exceptions.StockInsuficienteException;
@@ -23,6 +24,14 @@ public class Venta {
 
 	public DateTime getFechaDeSolicitudDeCompra() {
 		return fechaDeSolicitudDeCompra;
+	}
+	
+	public Boolean esVentaPendienteDeEntrega(){
+		if (this.esVentaADomicilio()){
+			VentaADomicilio v2 = (VentaADomicilio) this;
+			return v2.getEnvio().getEstado().esPendienteDeEnvio();
+		}
+		return false;
 	}
 
 	public void setFechaDeSolicitudDeCompra(DateTime dechaDeSolicitudDeCompra) {
