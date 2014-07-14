@@ -15,6 +15,11 @@ public abstract class EstadoEnvio {
 		env.enviar(cantAAbonar); 
 	}
 	
+	public Boolean esPendienteDeEnvio(){
+		return false;
+	}
+	
+	
 	public void cancelar(Envio env) throws CanceladoException{
 		
 		env.getVenta().devolverCompra();

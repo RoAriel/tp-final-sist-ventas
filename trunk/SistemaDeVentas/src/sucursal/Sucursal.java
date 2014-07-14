@@ -3,6 +3,7 @@ package sucursal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.joda.time.DateTime;
 
@@ -23,6 +24,26 @@ public class Sucursal {
 		productos = lp;
 		alerta = new AlertaStock();
 
+	}
+	
+	public List<Venta> ventasPendientesDeEnvio(){
+		List<Venta> ret = new ArrayList<Venta>();
+		for (Entry<Cliente, List<Venta>> entry : 
+			this.getRegistroVenta().entrySet()){				
+			List<Venta> retAux = this.filtrarEnviosPendientesDe(entry.getValue());
+			ret.addAll(retAux);
+		}
+		return ret;
+	}
+	
+	List<Venta> filtrarEnviosPendientesDe(List<Venta> lv){
+		List<Venta> ret = lv;
+		for(Venta v: ret){
+			if (!(v.esVentaPendienteDeEntrega())){
+				ret.remove(v);
+			}
+		}
+		return ret;
 	}
 
 	public void registrarVenta(Cliente c, Venta nuevaVenta) {
