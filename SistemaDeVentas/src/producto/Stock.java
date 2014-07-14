@@ -44,7 +44,7 @@ public class Stock extends Observable {
 	}
 
 	/**
-	 * Proposito: Agrega cantidad al stock.
+	 * Agrega cantidad al stock.
 	 * 
 	 * @param cantidad
 	 *            nueva cantidad agregada al stock
@@ -57,7 +57,7 @@ public class Stock extends Observable {
 	}
 
 	/**
-	 * Proposito: Decrementa el stock cantidad de unidades
+	 * Decrementa el stock cantidad de unidades
 	 * 
 	 * @param cantidad
 	 *            cantidad a decrementar de stock
@@ -72,7 +72,7 @@ public class Stock extends Observable {
 	}
 
 	/**
-	 * Propostio: Denota el punto en el que se alcanza el stock critico.
+	 * Denota el punto en el que se alcanza el stock critico.
 	 * 
 	 * @return
 	 */
@@ -81,7 +81,7 @@ public class Stock extends Observable {
 	}
 
 	/**
-	 * Proposito: Denota el punto en el que se alcanza el stock minimo.
+	 * Denota el punto en el que se alcanza el stock minimo.
 	 * 
 	 * @return
 	 */

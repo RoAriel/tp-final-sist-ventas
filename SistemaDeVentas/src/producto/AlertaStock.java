@@ -6,7 +6,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class AlertaStock extends Observable implements Observer {
-	// este atributo interno es para mostrar la lista de pedidos que tiene la
+	// Este atributo interno es para mostrar la lista de pedidos que tiene la
 	// alerta.
 	private List<Pedido> pedidos;
 
@@ -19,7 +19,7 @@ public class AlertaStock extends Observable implements Observer {
 	}
 
 	/**
-	 * Proposito: Se agrega un nuevo pedido sobre los cuales se quiere
+	 * Se agrega un nuevo pedido sobre los cuales se quiere
 	 * notificar.
 	 * 
 	 * @param nuevoPedido
@@ -31,7 +31,7 @@ public class AlertaStock extends Observable implements Observer {
 	}
 
 	/**
-	 * Proposito: Quita un pedido a los cuales se les notifica el cambio de
+	 * Quita un pedido a los cuales se les notifica el cambio de
 	 * stock.
 	 * 
 	 * @param pedidoAQuitar
