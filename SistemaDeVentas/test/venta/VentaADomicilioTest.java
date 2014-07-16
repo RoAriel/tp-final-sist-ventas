@@ -38,6 +38,11 @@ public class VentaADomicilioTest {
 	    
 	    
 	}
+	
+	@Test
+	public void esVentaADomicilio(){
+		assertTrue(ventaAD.esVentaADomicilio());
+	}
 
 	@Test
 	public void testConstructorSinParameros(){

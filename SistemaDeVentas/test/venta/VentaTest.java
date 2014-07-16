@@ -1,5 +1,6 @@
 package venta;
 
+import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.*;
 
 import org.junit.Before;
@@ -26,6 +27,11 @@ public class VentaTest {
 		cliente = mock(Cliente.class);
 		 
 		
+	}
+	
+	@Test
+	public void esVentaADomicilio(){
+		assertFalse(venta.esVentaADomicilio());
 	}
 
 	@Test (expected = SaldoInsuficienteCtaCteException.class)
