@@ -1,8 +1,6 @@
 package envio;
 
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.when;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -37,6 +35,11 @@ public class EstadoEnvioTest {
 		
 
 		assertTrue(true);
+	}
+	
+	@Test
+	public void esPendienteDeEnvio(){
+		assertFalse(estadoDeEnv.esPendienteDeEnvio());
 	}
 	
 	
