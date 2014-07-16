@@ -23,7 +23,10 @@ public class Sucursal {
 		registroVenta = reg;
 		productos = lp;
 		alerta = new AlertaStock();
-
+	}
+	
+	public List<Venta> obtenerVentasDe(Cliente c){
+		return this.getRegistroVenta().get(c);
 	}
 	
 	public List<Venta> ventasPendientesDeEnvio(){
