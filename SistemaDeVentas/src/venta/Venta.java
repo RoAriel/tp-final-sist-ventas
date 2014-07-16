@@ -26,6 +26,10 @@ public class Venta {
 		return fechaDeSolicitudDeCompra;
 	}
 	
+	public Boolean esVentaADomicilio(){
+		return false;
+	}
+	
 	public Boolean esVentaPendienteDeEntrega(){
 		if (this.esVentaADomicilio()){
 			VentaADomicilio v2 = (VentaADomicilio) this;
