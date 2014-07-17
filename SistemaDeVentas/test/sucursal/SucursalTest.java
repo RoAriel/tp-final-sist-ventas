@@ -54,6 +54,33 @@ public class SucursalTest {
 		fecha4 = new DateTime(2014, 6, 7, 6, 1);
 		
 	}
+	
+	@Test
+	public void filtrarPendientesDeEnvio(){
+		//venta1 ES una venta a domicilio con envio pendiente
+		when(venta1.esVentaPendienteDeEntrega()).thenReturn(true);
+		//venta2 No es una venta pendiente de envio, por ej puede ser
+		//una venta directa
+		when(venta2.esVentaPendienteDeEntrega()).thenReturn(false);
+		List<Venta> listaV = new ArrayList<Venta>();
+		listaV.add(venta1);
+		listaV.add(venta2);
+		assertTrue(sucursal.filtrarEnviosPendientesDe
+				(listaV).contains(venta1));
+		assertFalse(sucursal.filtrarEnviosPendientesDe
+				(listaV).contains(venta2));
+	}
+	
+	
+	
+	@Test
+	public void ventasPendientesDeEnvio(){
+		sucursal.registrarVenta(cliente1, venta1);
+		sucursal.registrarVenta(cliente1, venta2);
+		when(venta1.esVentaPendienteDeEntrega()).thenReturn(true);
+		when(venta2.esVentaPendienteDeEntrega()).thenReturn(false);
+		assertEquals(1, sucursal.ventasPendientesDeEnvio().size());
+	}
 
 	@Test
 	public void registrarVenta() {
