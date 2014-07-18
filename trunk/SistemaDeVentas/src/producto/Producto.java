@@ -9,14 +9,21 @@ public class Producto {
 	private String marca;
 	private String descripcion;
 	private List<Presentacion> presentaciones;
+	private List<TipoProducto> tiposDelProducto;
 
-	public Producto(String nombre, String marca, String descripcion) {
+	public Producto(String nombre, String marca, String descripcion,List<TipoProducto>  tipos) {
 		this.nombre = nombre;
 		this.marca = marca;
 		this.descripcion = descripcion;
 		this.presentaciones = new ArrayList<Presentacion>();
+		
+		this.tiposDelProducto = tipos;
 	}
 
+	public List<TipoProducto> getTiposDelProducto(){
+		return this.tiposDelProducto;
+	}
+	
 	/**
 	 * Denota el nombre del producto.
 	 * 

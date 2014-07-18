@@ -2,17 +2,24 @@ package producto;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.mockito.Mockito.*;
 
 public class ProductoTest {
 	Producto producto;
+	List<TipoProducto> tipos;
 	
 	@Before
 	public void setUp() throws Exception {
-		this.producto= new Producto("Pepitos", "Arcor", "Galletitas para todas las edades."); 
+		tipos = new ArrayList<TipoProducto>();
+		tipos.add(mock(TipoProducto.class));
+		this.producto= new Producto("Pepitos", "Arcor", "Galletitas para todas las edades.",tipos); 
 	}
 
 	@After
@@ -25,6 +32,7 @@ public class ProductoTest {
 		assertEquals("Arcor", producto.marca());
 		assertEquals("Galletitas para todas las edades.", producto.descripcion());
 		assertEquals(0, producto.presentaciones().size());
+		assertEquals(tipos,producto.getTiposDelProducto());
 	}
 	
 	@Test
